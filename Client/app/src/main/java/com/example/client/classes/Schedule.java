@@ -8,6 +8,6 @@ public class Schedule {
     private ArrayList<Date> _timeLine;
 
     public static void outputSchedule(){
-        
+
     }
 }

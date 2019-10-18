@@ -2,13 +2,14 @@ package com.example.client.classes;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Pet {
 
     private String _name;
     private Date _dateOfBirth;
     private ArrayList<Feeding> _feedingList;
+    private Boolean _sex; //подумать над типом пола
+    //тип животного (доп классовая система кошка собака попугай рыбка и тд)
 
     public Pet(String name) {
         _name = name;
