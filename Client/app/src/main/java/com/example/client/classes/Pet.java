@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Pet {
 
+    private int id;
     private String _name;
     private Date _dateOfBirth;
     private ArrayList<Feeding> _feedingList;
@@ -14,6 +15,14 @@ public class Pet {
     public Pet(String name) {
         _name = name;
         _feedingList = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String get_name() {
@@ -38,5 +47,13 @@ public class Pet {
 
     public void set_feedingList(ArrayList<Feeding> _feedingList) {
         this._feedingList = _feedingList;
+    }
+
+    public Boolean get_sex() {
+        return _sex;
+    }
+
+    public void set_sex(Boolean _sex) {
+        this._sex = _sex;
     }
 }

@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Client</string>
+    <string name="app_name">Питомцы</string>
+    <string name="add_new_pet_txt">Добавить питомца</string>
+    <string name="schedule_btn_txt">Расписание кормления</string>
+    <string name="new_pet_activity_text">тут будет питомец</string>
+    <string name="schedule_text">а тут расписание</string>
 </resources>
