@@ -25,6 +25,10 @@
         </activity>
         <activity android:name=".activities.PetProfileActivity"></activity>
         <activity android:name=".activities.ScheduleActivity"></activity>
+        <activity android:name=".activities.AuthorizationActivity">
+
+        </activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/pet_name_txt_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_pet_activity_text" />
-</RelativeLayout>
+        android:padding="8dp"
+        android:text="@string/pet_name_txt"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/pet_name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/pet_date_of_birth_txt_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/date_of_birth_txt"
+        android:textSize="18sp" />
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/new_pet_save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_btn_txt"
+        android:onClick="saveBtnOnClick"/>
+</LinearLayout>

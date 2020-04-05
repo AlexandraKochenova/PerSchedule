@@ -6,6 +6,7 @@ import java.util.Date;
 public class Schedule {
 
     private ArrayList<Date> _timeLine;
+    private ArrayList<Responsibility> _responsibilityList;
 
     public static void outputSchedule(){
 

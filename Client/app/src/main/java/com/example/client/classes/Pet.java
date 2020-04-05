@@ -2,12 +2,13 @@ package com.example.client.classes;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Pet {
 
     private int id;
     private String _name;
-    private Date _dateOfBirth;
+    private GregorianCalendar _dateOfBirth;
     private ArrayList<Feeding> _feedingList;
     private Boolean _sex; //подумать над типом пола
     //тип животного (доп классовая система кошка собака попугай рыбка и тд)
@@ -33,11 +34,11 @@ public class Pet {
         this._name = _name;
     }
 
-    public Date get_dateOfBirth() {
+    public GregorianCalendar get_dateOfBirth() {
         return _dateOfBirth;
     }
 
-    public void set_dateOfBirth(Date _dateOfBirth) {
+    public void set_dateOfBirth(GregorianCalendar _dateOfBirth) {
         this._dateOfBirth = _dateOfBirth;
     }
 

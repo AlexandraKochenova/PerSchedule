@@ -1,6 +1,8 @@
 package com.example.client.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,64 +12,52 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.client.R;
 import com.example.client.adapters.PetAdapter;
 import com.example.client.classes.Pet;
+import com.example.client.helpers.DatabaseHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PetListActivity extends AppCompatActivity {
 
-    private ListView petsList;
+    private RecyclerView _petsList;
+    private DatabaseHelper _dbHelper;
+    private PetAdapter _petAdapter;
+    private FloatingActionButton _addNewPetBtn;
+    private LinearLayoutManager _layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pet_list_activity);
+        _dbHelper = new DatabaseHelper(getApplicationContext());
+    }
 
-        petsList = (ListView) findViewById(R.id.pets_list);
-
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, initData());
-        PetAdapter adapter = new PetAdapter(getApplicationContext(), initData());
-
-        petsList.setAdapter(adapter);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        _petsList = (RecyclerView) findViewById(R.id.pets_list);
+        _layoutManager = new LinearLayoutManager(this);
+        _petsList.setLayoutManager(_layoutManager);
+        _petAdapter = new PetAdapter(getApplicationContext(), initData());
+        _petsList.setAdapter(_petAdapter);
+        _addNewPetBtn = (FloatingActionButton) findViewById(R.id.add_new_pet_btn);
+        _addNewPetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addNewPet();
+            }
+        });
     }
 
     private List<Pet> initData(){
-        List<Pet> list = new ArrayList<Pet>();
-        list.add(new Pet("Максик"));
-        list.add(new Pet("Шурик"));
+        List<Pet> list = _dbHelper.selectPets();
         return list;
-    }
-
-    public void petItemOnClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), PetProfileActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.pet_list_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.add_new_pet:
-                addNewPet();
-                return true;
-            case R.id.schedule_btn:
-                openSchedule();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-
-        }
-
     }
 
     private void addNewPet(){
@@ -75,9 +65,8 @@ public class PetListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openSchedule(){
-        Intent intent = new Intent(getApplicationContext(), ScheduleActivity.class);
-        startActivity(intent);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
-
 }

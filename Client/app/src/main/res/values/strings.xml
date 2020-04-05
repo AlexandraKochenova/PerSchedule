@@ -4,4 +4,10 @@
     <string name="schedule_btn_txt">Расписание кормления</string>
     <string name="new_pet_activity_text">тут будет питомец</string>
     <string name="schedule_text">а тут расписание</string>
+    <string name="pet_name_txt">Имя</string>
+    <string name="date_of_birth_txt">Дата рождения</string>
+    <string name="save_btn_txt">Сохранить</string>
+    <string name="input_login">Введите логин</string>
+    <string name="input_password">Введите пароль</string>
+    <string name="login_btn">Войти</string>
 </resources>

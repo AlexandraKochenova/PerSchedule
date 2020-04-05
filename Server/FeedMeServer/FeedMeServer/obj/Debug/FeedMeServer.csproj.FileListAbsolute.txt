@@ -1,0 +1,12 @@
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\obj\Debug\FeedMeServer.csprojAssemblyReference.cache
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\obj\Debug\FeedMeServer.csproj.CoreCompileInputs.cache
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\bin\FeedMeServer.dll.config
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\bin\FeedMeServer.dll
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\bin\FeedMeServer.pdb
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\bin\EntityFramework.dll
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\bin\EntityFramework.SqlServer.dll
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\bin\EntityFramework.xml
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\bin\EntityFramework.SqlServer.xml
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\obj\Debug\FeedMeServer.csproj.CopyComplete
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\obj\Debug\FeedMeServer.dll
+D:\AlmaMater\FeedMeServer\FeedMeServer\FeedMeServer\obj\Debug\FeedMeServer.pdb
