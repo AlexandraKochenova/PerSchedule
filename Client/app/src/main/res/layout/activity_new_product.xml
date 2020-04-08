@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <EditText
+        android:id="@+id/new_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/product_name_input_txt"/>
+
+    <EditText
+        android:id="@+id/new_product_caloric"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_below="@+id/new_product_name"
+        android:layout_marginBottom="16dp"
+        android:hint="@string/product_caloric_input_txt"/>
+
+    <EditText
+        android:id="@+id/new_product_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_product_caloric"
+        android:layout_marginBottom="16dp"
+        android:inputType="numberDecimal"
+        android:hint="@string/product_store_txt"
+        />
+
+    <Button
+        android:id="@+id/new_product_save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_product_store"
+        android:text="@string/save_btn_txt"/>
+
+</RelativeLayout>

@@ -1,27 +1,64 @@
 package com.example.client.classes;
 
+import android.widget.Toast;
+
 public class Product {
 
-    private String _name;
-    private int _calorificValue;
+    private int id;
+    private String name;
+    private int calorificValue;
+    private double store;
 
     public Product(String name) {
-        _name = name;
+        this.name = name;
     }
 
-    public String get_name() {
-        return _name;
+    public Product(String name, int calorificValue, double store) {
+        this.name = name;
+        this.calorificValue = calorificValue;
+        this.store = store;
     }
 
-    public void set_name(String _name) {
-        this._name = _name;
+    public Product(int id, String name, int calorificValue, double store){
+        this.id = id;
+        this.name = name;
+        this.calorificValue = calorificValue;
+        this.store = store;
     }
 
-    public int get_calorificValue() {
-        return _calorificValue;
+    public int getId() {
+        return id;
     }
 
-    public void set_calorificValue(int _calorificValue) {
-        this._calorificValue = _calorificValue;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCalorificValue() {
+        return calorificValue;
+    }
+
+    public void setCalorificValue(int calorificValue) {
+        this.calorificValue = calorificValue;
+    }
+
+    public double getStore() {
+        return store;
+    }
+
+    public void pickFromStore(double x) {
+        this.store -= x;
+    }
+
+    public void setStore(double store) {
+        this.store = store;
     }
 }

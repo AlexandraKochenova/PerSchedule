@@ -1,16 +1,9 @@
 package com.example.client.activities;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,29 +18,29 @@ import java.util.List;
 
 public class PetListActivity extends AppCompatActivity {
 
-    private RecyclerView _petsList;
-    private DatabaseHelper _dbHelper;
-    private PetAdapter _petAdapter;
-    private FloatingActionButton _addNewPetBtn;
-    private LinearLayoutManager _layoutManager;
+    private RecyclerView petsList;
+    private DatabaseHelper dbHelper;
+    private PetAdapter petAdapter;
+    private FloatingActionButton addNewPetBtn;
+    private LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pet_list_activity);
-        _dbHelper = new DatabaseHelper(getApplicationContext());
+        setContentView(R.layout.activity_pet_list);
+        dbHelper = new DatabaseHelper(getApplicationContext());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        _petsList = (RecyclerView) findViewById(R.id.pets_list);
-        _layoutManager = new LinearLayoutManager(this);
-        _petsList.setLayoutManager(_layoutManager);
-        _petAdapter = new PetAdapter(getApplicationContext(), initData());
-        _petsList.setAdapter(_petAdapter);
-        _addNewPetBtn = (FloatingActionButton) findViewById(R.id.add_new_pet_btn);
-        _addNewPetBtn.setOnClickListener(new View.OnClickListener() {
+        petsList = (RecyclerView) findViewById(R.id.pets_list);
+        layoutManager = new LinearLayoutManager(this);
+        petsList.setLayoutManager(layoutManager);
+        petAdapter = new PetAdapter(getApplicationContext(), initData());
+        petsList.setAdapter(petAdapter);
+        addNewPetBtn = (FloatingActionButton) findViewById(R.id.add_new_pet_btn);
+        addNewPetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addNewPet();
@@ -56,7 +49,7 @@ public class PetListActivity extends AppCompatActivity {
     }
 
     private List<Pet> initData(){
-        List<Pet> list = _dbHelper.selectPets();
+        List<Pet> list = dbHelper.selectPets();
         return list;
     }
 

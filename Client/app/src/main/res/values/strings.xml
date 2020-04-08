@@ -1,13 +1,50 @@
 <resources>
     <string name="app_name">Питомцы</string>
+
     <string name="add_new_pet_txt">Добавить питомца</string>
     <string name="schedule_btn_txt">Расписание кормления</string>
-    <string name="new_pet_activity_text">тут будет питомец</string>
-    <string name="schedule_text">а тут расписание</string>
+
     <string name="pet_name_txt">Имя</string>
+    <string name="pet_sex_male_txt">Самец</string>
+    <string name="pet_sex_female_txt">Самка</string>
     <string name="date_of_birth_txt">Дата рождения</string>
     <string name="save_btn_txt">Сохранить</string>
+    <string-array name="type_pets">
+        <item>Кошка</item>
+        <item>Собака</item>
+        <item>Попугай</item>
+        <item>Хомяк</item>
+        <item>Кролик</item>
+        <item>Змея</item>
+        <item>Паук</item>
+    </string-array>
+
+    <string name="product_name_input_txt">Введите название продукта</string>
+    <string name="product_caloric_input_txt">Введите количество кКал на 100гр</string>
+    <string name="product_store_txt">Введите вес имеющегося продукта в запасах в кг</string>
+
     <string name="input_login">Введите логин</string>
     <string name="input_password">Введите пароль</string>
     <string name="login_btn">Войти</string>
+
+    <string-array name="responsibility_type">
+        <item>Питание</item>
+        <item>Прогулка</item>
+        <item>Лекарства</item>
+        <!--<item>Прививки</item>-->
+    </string-array>
+
+    <string-array name="period_array">
+        <item>Не повторять</item>
+        <item>Каждый день</item>
+        <item>Раз в неделю</item>
+        <item>Раз в месяц</item>
+        <item>Раз в год</item>
+    </string-array>
+
+    <string name="minutes_txt">мин.</string>
+    <string name="time_for_walk_txt">Время прогулки:</string>
+
+    <string name="medicine_input">Введите название лекарства</string>
+    <string name="value_in_things">шт.</string>
 </resources>

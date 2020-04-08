@@ -12,8 +12,6 @@
         <activity android:name=".activities.MainActivity">
 
         </activity>
-
-        <activity android:name=".activities.NewFeedActivity"></activity>
         <activity android:name=".activities.NewPetActivity"></activity>
         <activity android:name=".activities.NewProductActivity"></activity>
         <activity android:name=".activities.PetListActivity">
@@ -28,6 +26,9 @@
         <activity android:name=".activities.AuthorizationActivity">
 
         </activity>
+
+        <activity android:name=".activities.NewResponsibilityActivity"/>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

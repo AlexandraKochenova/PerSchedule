@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp">
+
+    <TimePicker
+        android:id="@+id/feeding_fragment_time_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:timePickerMode="spinner"
+        />
+
+    <ImageView
+        android:id="@+id/feeding_fragment_add_new_product"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_below="@+id/feeding_fragment_time_picker"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/add_item_image"
+        android:layout_marginLeft="16dp"/>
+
+    <Spinner
+        android:id="@+id/feeding_fragment_list_feed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feeding_fragment_time_picker"
+        android:layout_toLeftOf="@+id/feeding_fragment_add_new_product"/>
+
+    <EditText
+        android:id="@+id/feeding_fragment_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feeding_fragment_list_feed"
+        android:inputType="number"
+        android:layout_marginTop="16dp"/>
+
+    <Spinner
+        android:id="@+id/feeding_fragment_list_period"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feeding_fragment_weight"
+        android:layout_marginTop="16dp"
+        />
+
+    <Button
+        android:id="@+id/feeding_fragment_save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_btn_txt"
+        android:layout_below="@+id/feeding_fragment_list_period"
+        android:layout_marginTop="16dp"
+        />
+</RelativeLayout>

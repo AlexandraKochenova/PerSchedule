@@ -1,5 +1,8 @@
 package com.example.client.helpers;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class Constants {
     public static final int ERROR = 1;
     public static final int OK = 0;
@@ -31,6 +34,20 @@ public class Constants {
 
     public static final String RESPONSIBILITY_CODE_FEDDING = "Feeding";
     public static final String RESPONSIBILITY_CODE_WALK = "Walk";
+    public static final String RESPONSIBILITY_CODE_MEDICINE = "Medicine";
+    public static final String RESPONSIBILITY_CODE_VACCINATION = "Vaccination";
 
+    public static final int NO_PERIOD = 0;
+    public static final int EVERYDAY = 1;
+    public static final int EVERYWEEK = 2;
+    public static final int EVERYMONTH = 3;
+    public static final int EVERYYEAR = 4;
+
+    public static long currentDate(){
+        Calendar cal = new GregorianCalendar(Calendar.getInstance().get(Calendar.getInstance().YEAR),
+                Calendar.getInstance().get(Calendar.getInstance().MONTH),
+                Calendar.getInstance().get(Calendar.getInstance().DAY_OF_MONTH));
+        return cal.getTimeInMillis();
+    }
 
 }

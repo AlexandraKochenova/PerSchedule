@@ -2,7 +2,6 @@ package com.example.client.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.client.R;
-import com.example.client.classes.User;
 import com.example.client.helpers.Constants;
 import com.example.client.helpers.DatabaseHelper;
 import com.example.client.helpers.NetworkService;
@@ -23,22 +21,22 @@ import retrofit2.Response;
 
 public class AuthorizationActivity extends AppCompatActivity {
 
-    private EditText _login;
-    private EditText _password;
+    private EditText login;
+    private EditText password;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.authorization_activity);
+        setContentView(R.layout.activity_authorization);
 
-        _login = (EditText) findViewById(R.id.login);
-        _password = (EditText) findViewById(R.id.password);
+        login = (EditText) findViewById(R.id.login);
+        password = (EditText) findViewById(R.id.password);
         findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AuthPost data = new AuthPost();
-                data.setLogin(_login.getText().toString());
-                data.setPassword(_password.getText().toString());
+                data.setLogin(login.getText().toString());
+                data.setPassword(password.getText().toString());
                 NetworkService.getInstance()
                         .getJSONApi()
                         .authorizationUser(data)

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/pet_name_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/pet_name_txt"
+                android:layout_marginBottom="16dp"/>
+
+            <CalendarView
+                android:id="@+id/pet_add_calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pet_name_input"
+                android:layout_marginBottom="16dp"/>
+
+            <RadioGroup
+                android:id="@+id/radio_group_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pet_add_calendar_view"
+                android:layout_marginBottom="16dp">
+                <RadioButton
+                    android:id="@+id/radio_btn_sex_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_sex_male_txt"/>
+                <RadioButton
+                    android:id="@+id/radio_btn_sex_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_sex_female_txt"/>
+            </RadioGroup>
+
+            <Spinner
+                android:id="@+id/pet_type_choice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radio_group_sex"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/new_pet_save_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_btn_txt"
+                android:onClick="saveBtnOnClick"
+                android:layout_below="@+id/pet_type_choice"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

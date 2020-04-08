@@ -1,21 +1,38 @@
 package com.example.client.classes;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class Pet {
 
     private int id;
-    private String _name;
-    private GregorianCalendar _dateOfBirth;
-    private ArrayList<Feeding> _feedingList;
-    private Boolean _sex; //подумать над типом пола
-    //тип животного (доп классовая система кошка собака попугай рыбка и тд)
+    private String name;
+    private Date dateOfBirth;
+    private boolean sex;
+    private String type;//подумать над типом пола
 
-    public Pet(String name) {
-        _name = name;
-        _feedingList = new ArrayList<>();
+    public Pet(int id) {
+        this.id = id;
+    }
+
+    public Pet(int id, String name ) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Pet(String name, Date dateOfBirth, boolean sex, String type){
+
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.type = type;
+    }
+
+    public Pet(int id, String name, Date dateOfBirth, boolean sex, String type) {
+        this.id = id;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.type = type;
     }
 
     public int getId() {
@@ -26,35 +43,35 @@ public class Pet {
         this.id = id;
     }
 
-    public String get_name() {
-        return _name;
+    public String getName() {
+        return name;
     }
 
-    public void set_name(String _name) {
-        this._name = _name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public GregorianCalendar get_dateOfBirth() {
-        return _dateOfBirth;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void set_dateOfBirth(GregorianCalendar _dateOfBirth) {
-        this._dateOfBirth = _dateOfBirth;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public ArrayList<Feeding> get_feedingList() {
-        return _feedingList;
+    public boolean getSex() {
+        return sex;
     }
 
-    public void set_feedingList(ArrayList<Feeding> _feedingList) {
-        this._feedingList = _feedingList;
+    public void setSex(boolean sex) {
+        this.sex = sex;
     }
 
-    public Boolean get_sex() {
-        return _sex;
+    public String getType() {
+        return type;
     }
 
-    public void set_sex(Boolean _sex) {
-        this._sex = _sex;
+    public void setType(String type) {
+        this.type = type;
     }
 }

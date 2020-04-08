@@ -1,51 +1,63 @@
 package com.example.client.activities;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.GridView;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.client.R;
-import com.example.client.classes.Feeding;
-import com.example.client.classes.Pet;
+import com.example.client.adapters.ResponsibilityListAdapter;
+import com.example.client.classes.Responsibility;
 import com.example.client.helpers.DatabaseHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class ScheduleActivity extends AppCompatActivity {
 
-    private DatabaseHelper _dbHelper;
-    private GridView _scheduleItem;
+    private DatabaseHelper dbHelper;
+    private RecyclerView responsibilityList;
+    private ResponsibilityListAdapter adapter;
+    private FloatingActionButton addNewResponsibilityBtn;
+    private LinearLayoutManager layoutManager;
 
+    private int petId;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.schedule_activity);
-        _dbHelper = new DatabaseHelper(getApplicationContext());
+        setContentView(R.layout.activity_schedule);
+        dbHelper = new DatabaseHelper(getApplicationContext());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        _scheduleItem = (GridView) findViewById(R.id.schedule_grid);
-
-
-
-    }
-
-    private Map<Date, Feeding> initData(){
-        List<Pet> petList = _dbHelper.selectPets();
-        Map<Date, Feeding> feedingList = new HashMap<Date, Feeding>();
-        for (int i = 0; i < petList.size(); i++){
-            Pet tempPet = petList.get(i);
-            List<Feeding> tempFeedingList = tempPet.get_feedingList();
-            while(tempFeedingList.size() > 0) {
-                Feeding tmpFeeding = tempFeedingList.remove(0);
-             //   feedingList.put(tmpFeeding.get_feedingTime(), tmpFeeding);
+        petId = Integer.valueOf(getIntent().getStringExtra("petId"));
+        responsibilityList = (RecyclerView) findViewById(R.id.responsibility_list);
+        layoutManager = new LinearLayoutManager(this);
+        responsibilityList.setLayoutManager(layoutManager);
+        adapter = new ResponsibilityListAdapter(getApplicationContext(), initData());
+        responsibilityList.setAdapter(adapter);
+        addNewResponsibilityBtn = (FloatingActionButton) findViewById(R.id.add_new_responsibility_btn);
+        addNewResponsibilityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NewResponsibilityActivity.class);
+                intent.putExtra("petId", String.valueOf(petId));
+                startActivity(intent);
             }
-        }
-        return feedingList;
+        });
     }
+
+    private List<Responsibility> initData() {
+        List<Responsibility> list = dbHelper.selectResponsibility(petId);
+        return list;
+    }
+
+
+
 }
