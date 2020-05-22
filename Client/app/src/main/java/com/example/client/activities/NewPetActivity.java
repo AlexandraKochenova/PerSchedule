@@ -16,9 +16,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.client.R;
 import com.example.client.classes.Pet;
+import com.example.client.helpers.Constants;
 import com.example.client.helpers.DatabaseHelper;
+import com.example.client.helpers.NetworkService;
+import com.example.client.helpers.ServerToClientHelper;
 
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewPetActivity extends AppCompatActivity {
 
@@ -70,6 +77,7 @@ public class NewPetActivity extends AppCompatActivity {
 
         String type = this.type;
         newPet = new Pet(name, date, sex, type);
+        savePetToServer();
         long result = dbHelper.saveNewPet(newPet);
         if (result <= 0) {
             Toast.makeText(getApplicationContext(),"Failed, Try again", Toast.LENGTH_SHORT).show();
@@ -80,5 +88,28 @@ public class NewPetActivity extends AppCompatActivity {
     public void petListOpen(){
         Intent intent = new Intent(getApplicationContext(), PetListActivity.class);
         startActivity(intent);
+    }
+
+    public void savePetToServer() {
+        int ownerFamId = dbHelper.getFamId();
+        NetworkService.getInstance()
+                .getJSONApi()
+                .newPet(ServerToClientHelper.toServerPet(newPet,ownerFamId))
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (Integer.valueOf(response.body()) >0) {
+                            if (newPet != null) {
+                                newPet.setId(Integer.valueOf(response.body()));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),"Failed, Pet Not Created", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 }

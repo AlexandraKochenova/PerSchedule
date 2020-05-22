@@ -11,7 +11,8 @@ public class NetworkService {
     private static NetworkService mInstance;
     //private final static String BASE_URL = "http://192.168.0.56:5309/Service1.svc/";
     //private final static String BASE_URL = "http://192.168.1.9:5309/Service1.svc/";
-    private final static String BASE_URL = "http://192.168.43.185:5309/Service1.svc/";
+    private final static String BASE_URL = "http://192.168.43.185:5310/Service1.svc/";
+    //private final static String BASE_URL = "http://169.254.42.168:5310/Service1.svc/";
     private Retrofit mRetrofit;
 
     private NetworkService(){

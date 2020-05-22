@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.provider.ContactsContract;
 
 import com.example.client.classes.Feeding;
@@ -51,11 +52,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_MEDICINE_STORE = "medicine_store";
 
     public static final String COLUMN_USER_ID = "user_id";
+    public static final String COLUMN_USER_SERVER_ID = "user_server_id";
     public static final String COLUMN_USER_NAME = "user_name";
     public static final String COLUMN_USER_LOGIN = "login";
     public static final String COLUMN_USER_PASSWORD = "password";
     public static final String COLUMN_USER_FAMILY_ID = "family_id";
     public static final String COLUMN_USER_IS_HEAD_OF_FAMILY = "is_head_of_family";
+    public static final String COLUMN_USER_IS_CURRENT = "is_current_user";
 
     public static final String COLUMN_RESPONSIBILITY_ID = "responsibility_id";
     public static final String COLUMN_RESPONSIBILITY_SERVER_ID = "responsibility_server_id";
@@ -91,10 +94,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_PRODUCT_STORE + " REAL" + ");");
         sqLiteDatabase.execSQL("CREATE TABLE " + USER_TABLE + " (" +
                 COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_USER_SERVER_ID + " INTEGER," +
                 COLUMN_USER_NAME + " TEXT," +
                 COLUMN_USER_LOGIN + " TEXT," +
                 COLUMN_USER_PASSWORD + " TEXT," +
                 COLUMN_USER_FAMILY_ID + " TEXT," +
+                COLUMN_USER_IS_CURRENT + " TEXT," +
                 COLUMN_USER_IS_HEAD_OF_FAMILY + " TEXT" + ");");
         sqLiteDatabase.execSQL("CREATE TABLE " + RESPONSIBILITY_TABLE + "(" +
                 COLUMN_RESPONSIBILITY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -129,7 +134,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor query = sqLiteDatabase.rawQuery("SELECT * FROM " + DatabaseHelper.PETS_TABLE, null);
         if(query.moveToFirst()) {
             int indexName = query.getColumnIndex(DatabaseHelper.COLUMN_PETS_NAME);
-            int indexId = query.getColumnIndex(DatabaseHelper.COLUMN_PETS_ID);
+            int indexId = query.getColumnIndex(DatabaseHelper.COLUMN_PETS_ID_SERVER);
             int indexDate = query.getColumnIndex(DatabaseHelper.COLUMN_DATE_OF_BIRTH);
             int indexSex = query.getColumnIndex(DatabaseHelper.COLUMN_SEX);
             int indexType = query.getColumnIndex(DatabaseHelper.COLUMN_TYPE);
@@ -152,12 +157,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public long saveNewPet(Pet newPet){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(DatabaseHelper.COLUMN_PETS_NAME, newPet.getName());
-        cv.put(DatabaseHelper.COLUMN_DATE_OF_BIRTH, newPet.getDateOfBirth().getTime());
-        cv.put(DatabaseHelper.COLUMN_SEX, newPet.getSex());
-        cv.put(DatabaseHelper.COLUMN_TYPE, newPet.getType());
+        ContentValues cv = getCVFromPet(newPet);
         return sqLiteDatabase.insert(DatabaseHelper.PETS_TABLE, null, cv);
+    }
+
+    public long updatePet(Pet pet) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        ContentValues cv = getCVFromPet(pet);
+        int x = sqLiteDatabase.update(DatabaseHelper.PETS_TABLE, cv, DatabaseHelper.COLUMN_PETS_ID_SERVER + " = ?", new String[] { String.valueOf(pet.getId())});
+        if (x > 0){
+            return x;
+        }
+        else {
+            return saveNewPet(pet);
+        }
     }
 
     /////RESPONSIBILITY
@@ -374,12 +387,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public long authUser(User user) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
+        cv.put(DatabaseHelper.COLUMN_USER_SERVER_ID, user.getId());
         cv.put(DatabaseHelper.COLUMN_USER_LOGIN, user.getLogin());
         cv.put(DatabaseHelper.COLUMN_USER_PASSWORD, user.getPassword());
         cv.put(DatabaseHelper.COLUMN_USER_NAME, user.getName());
         cv.put(DatabaseHelper.COLUMN_USER_FAMILY_ID, user.getFamilyId());
+        cv.put(DatabaseHelper.COLUMN_USER_IS_CURRENT, "true");
         cv.put(DatabaseHelper.COLUMN_USER_IS_HEAD_OF_FAMILY, user.isHeadOfFamily());
         return sqLiteDatabase.insert(DatabaseHelper.USER_TABLE, null, cv);
+    }
+
+    public int getCurrentUserID(){
+        int id = 0;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor query = sqLiteDatabase.rawQuery("SELECT * FROM " + DatabaseHelper.USER_TABLE, null);
+        if (query.moveToFirst()) {
+            int indexID = query.getColumnIndex(DatabaseHelper.COLUMN_USER_SERVER_ID);
+            int indexCurrentUser = query.getColumnIndex(DatabaseHelper.COLUMN_USER_IS_CURRENT);
+            do {
+                String isCurrentUser = query.getString(indexCurrentUser);
+                if (isCurrentUser.equals("true")) {
+                    id = query.getInt(indexID);
+                    break;
+                }
+            }while(query.moveToNext());
+        }
+        return id;
+    }
+
+    public int getFamId() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor query = sqLiteDatabase.rawQuery("SELECT * FROM " + DatabaseHelper.USER_TABLE, null);
+        if (query.moveToFirst()) {
+            int indexFamId = query.getColumnIndex(DatabaseHelper.COLUMN_USER_FAMILY_ID);
+            return Integer.valueOf(query.getString(indexFamId));
+        }
+        return 0;
+    }
+
+
+
+
+    // GET CV
+
+    private ContentValues getCVFromPet(Pet pet) {
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseHelper.COLUMN_PETS_ID_SERVER, pet.getId());
+        cv.put(DatabaseHelper.COLUMN_PETS_NAME, pet.getName());
+        cv.put(DatabaseHelper.COLUMN_DATE_OF_BIRTH, pet.getDateOfBirth().getTime());
+        cv.put(DatabaseHelper.COLUMN_SEX, pet.getSex());
+        cv.put(DatabaseHelper.COLUMN_TYPE, pet.getType());
+        return cv;
     }
 
 

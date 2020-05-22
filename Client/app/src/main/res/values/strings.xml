@@ -25,7 +25,11 @@
 
     <string name="input_login">Введите логин</string>
     <string name="input_password">Введите пароль</string>
+    <string name="input_name">Введите имя</string>
+    <string name="input_family_name">Введите фамилию</string>
     <string name="login_btn">Войти</string>
+    <string name="registration_btn">Зарегистрироваться</string>
+    <string name="not_login_to_registration">Нет учетной записи?</string>
 
     <string-array name="responsibility_type">
         <item>Питание</item>
@@ -47,4 +51,6 @@
 
     <string name="medicine_input">Введите название лекарства</string>
     <string name="value_in_things">шт.</string>
+
+
 </resources>

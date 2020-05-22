@@ -28,6 +28,7 @@ namespace FeedMeServer
         public static string PET_DELETED = "Pet successfully deleted.";
         public static string PET_UPDATED = "Pet successfully updated.";
         public static string PET_NOT_FOUND = "Pet not found.";
+        public static string PET_NOT_CREATED = "Pet not created.";
 
         public static string RESPONSIBILITY_NOT_FOUND = "Responsibility not found";
         public static string RESPONSIBILITY_CREATED = "Responsibility created.";

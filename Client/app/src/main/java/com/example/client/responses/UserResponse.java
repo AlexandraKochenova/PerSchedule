@@ -1,6 +1,6 @@
 package com.example.client.responses;
 
-import com.example.client.classes.User;
+import com.example.client.server_models.ServerUser;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,13 +8,13 @@ public class UserResponse extends BaseResponse{
 
     @SerializedName("user")
     @Expose
-    private User user;
+    private ServerUser serverUser;
 
-    public User getUser() {
-        return user;
+    public ServerUser getServerUser() {
+        return serverUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setServerUser(ServerUser serverUser) {
+        this.serverUser = serverUser;
     }
 }

@@ -12,8 +12,11 @@ namespace FeedMeServer.Models
         [DataMember(Name = "id")]
         public int Id { get; set; }
 
-        [DataMember(Name = "dateTimeResponsibility")]
-        public DateTime DateTimeResponsibility { get; set; }
+        [DataMember(Name = "dateCreating")]
+        public long DateCreating { get; set; }
+
+        [DataMember(Name = "timeDoing")] 
+        public long TimeDoing { get; set; }
 
         [DataMember(Name = "information")]
         public string Information { get; set; }

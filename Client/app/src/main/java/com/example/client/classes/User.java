@@ -1,32 +1,12 @@
 package com.example.client.classes;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class User {
 
-    @SerializedName("id")
-    @Expose
     private int id;
-
-    @SerializedName("name")
-    @Expose
     private String name;
-
-    @SerializedName("login")
-    @Expose
     private String login;
-
-    @SerializedName("password")
-    @Expose
     private String password;
-
-    @SerializedName("familyId")
-    @Expose
     private int familyId;
-
-    @SerializedName("isHeadOfFamily")
-    @Expose
     private boolean isHeadOfFamily;
 
     public int getId() {

@@ -25,7 +25,8 @@ namespace FeedMeServer.Network
                 Responsibility currentResponsibility = context.Responsibilities.Find(responsibility.Id);
                 if (currentResponsibility != null)
                 {
-                    currentResponsibility.DateTimeResponsibility = responsibility.DateTimeResponsibility;
+                    currentResponsibility.DateCreating = responsibility.DateCreating;
+                    currentResponsibility.TimeDoing = responsibility.TimeDoing;
                     currentResponsibility.Information = responsibility.Information;
                     currentResponsibility.ResponsibilityCode = responsibility.ResponsibilityCode;
                     currentResponsibility.PetId = responsibility.PetId;
@@ -85,7 +86,8 @@ namespace FeedMeServer.Network
                                     Responsibility currentResponsibility = new Responsibility()
                                     {
                                         Id = responsibility.Id,
-                                        DateTimeResponsibility = responsibility.DateTimeResponsibility,
+                                        DateCreating = responsibility.DateCreating,
+                                        TimeDoing = responsibility.TimeDoing,
                                         Information = responsibility.Information,
                                         ResponsibilityCode = responsibility.ResponsibilityCode,
                                         PetId = responsibility.PetId,

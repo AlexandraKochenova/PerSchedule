@@ -77,6 +77,15 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="FeedMeContext.cs" />
+    <Compile Include="Migrations\202005171307108_InitialCreate.cs" />
+    <Compile Include="Migrations\202005171307108_InitialCreate.designer.cs">
+      <DependentUpon>202005171307108_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005210554533_AddCorrectionsMigration.cs" />
+    <Compile Include="Migrations\202005210554533_AddCorrectionsMigration.designer.cs">
+      <DependentUpon>202005210554533_AddCorrectionsMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AllPetsResponse.cs" />
     <Compile Include="Models\AllResponsibilityResponse.cs" />
     <Compile Include="Models\Auth.cs" />
@@ -85,6 +94,7 @@
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\Responsibility.cs" />
+    <Compile Include="Models\Thing.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserResponse.cs" />
     <Compile Include="Network\PetLogic.cs" />
@@ -107,6 +117,14 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202005171307108_InitialCreate.resx">
+      <DependentUpon>202005171307108_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005210554533_AddCorrectionsMigration.resx">
+      <DependentUpon>202005210554533_AddCorrectionsMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

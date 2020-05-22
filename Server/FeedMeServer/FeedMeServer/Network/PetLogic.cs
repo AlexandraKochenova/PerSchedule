@@ -14,7 +14,19 @@ namespace FeedMeServer.Network
             {
                 context.Pets.Add(pet);
                 context.SaveChanges();
-                return Constants.PET_CREATED;
+                string response = Constants.PET_CREATED;
+                var pets = from p in context.Pets where p.OwnerFamilyId.Equals(pet.OwnerFamilyId) select p;
+                if (pets != null && pets.Count() >0)
+                {
+                    pets.ToList<Pet>().ForEach(delegate (Pet tempPet)
+                    {
+                        if (tempPet.Name.Equals(pet.Name))
+                        {
+                            response = tempPet.Id.ToString();
+                        }
+                    });
+                }
+                return response;
             }
         }
 

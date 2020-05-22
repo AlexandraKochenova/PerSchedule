@@ -16,7 +16,13 @@ namespace FeedMeServer.Models
         public string Name { get; set; }
 
         [DataMember(Name = "age")]
-        public int Age { get; set; }
+        public long Age { get; set; }
+
+        [DataMember(Name="sex")]
+        public bool Sex { get; set; }
+
+        [DataMember(Name= "type")]
+        public string Type { get; set; }
 
         [DataMember(Name = "weight")]
         public double Weight { get; set; }

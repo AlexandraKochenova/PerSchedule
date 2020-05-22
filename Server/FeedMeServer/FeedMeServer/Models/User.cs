@@ -24,6 +24,9 @@ namespace FeedMeServer.Models
         [DataMember(Name = "familyId")]
         public int FamilyId { get; set; }
 
+        [DataMember(Name = "familyName")]
+        public string FamilyName { get; set; }
+
         [DataMember(Name = "isHeadOfFamily")]
         public bool IsHeadOfFamily { get; set; }
     }
