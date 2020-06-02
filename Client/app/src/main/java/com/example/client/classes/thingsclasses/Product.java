@@ -1,16 +1,18 @@
-package com.example.client.classes;
+package com.example.client.classes.thingsclasses;
 
-import android.widget.Toast;
+import com.example.client.classes.Thing;
 
-public class Product {
+public class Product extends Thing {
 
-    private int id;
-    private String name;
     private int calorificValue;
-    private double store;
+
 
     public Product(String name) {
         this.name = name;
+    }
+
+    public Product(int id) {
+        this.id = id;
     }
 
     public Product(String name, int calorificValue, double store) {
@@ -60,5 +62,16 @@ public class Product {
 
     public void setStore(double store) {
         this.store = store;
+    }
+
+    @Override
+    public String getInformation() {
+        return this.store + "@" + this.calorificValue;
+    }
+
+    @Override
+    public void setInformation(String value){
+        this.store = Double.valueOf(value.split("@")[0]);
+        this.calorificValue = Integer.valueOf(value.split("@")[1]);
     }
 }

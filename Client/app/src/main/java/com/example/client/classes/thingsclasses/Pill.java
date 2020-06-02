@@ -1,9 +1,12 @@
-package com.example.client.classes;
+package com.example.client.classes.thingsclasses;
 
-public class Pill {
-    private String name;
-    private double store;
-    private int id;
+import com.example.client.classes.Thing;
+
+public class Pill  extends Thing {
+
+    public Pill(int id) {
+        this.id = id;
+    }
 
     public Pill(int id, String name, double store) {
         this.id = id;
@@ -37,5 +40,10 @@ public class Pill {
 
     public void pickFromStore(double x) {
         this.store -= x;
+    }
+
+    @Override
+    public String getInformation() {
+        return this.store + "@-";
     }
 }

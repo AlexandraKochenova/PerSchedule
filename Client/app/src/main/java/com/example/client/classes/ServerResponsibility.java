@@ -1,41 +1,45 @@
-package com.example.client.server_models;
+package com.example.client.classes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Responsibility {
+public class ServerResponsibility {
 
     @SerializedName("id")
     @Expose
-    public int id;
-
-    @SerializedName("dateTimeResponsibility")
-    @Expose
-    public long dateTimeResponsibility;
+    private int id;
 
     @SerializedName("dateCreating")
     @Expose
-    public long dateCreating;
+    private long dateCreating;
 
     @SerializedName("timeDoing")
     @Expose
-    public long timeDoing;
+    private long timeDoing;
+
+    @SerializedName("readyDates")
+    @Expose
+    private String readyDate;
+
+    @SerializedName("period")
+    @Expose
+    private String period;
 
     @SerializedName("information")
     @Expose
-    public String information;
+    private String information;
 
     @SerializedName("responsibilityCode")
     @Expose
-    public int responsibilityCode;
+    private int responsibilityCode;
 
     @SerializedName("petId")
     @Expose
-    public int petId;
+    private int petId;
 
-    @SerializedName("ownerId")
+    @SerializedName("userID")
     @Expose
-    public int ownerId;
+    private int userID;
 
     public long getDateCreating() {
         return dateCreating;
@@ -59,14 +63,6 @@ public class Responsibility {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public long getDateTimeResponsibility() {
-        return dateTimeResponsibility;
-    }
-
-    public void setDateTimeResponsibility(long dateTimeResponsibility) {
-        this.dateTimeResponsibility = dateTimeResponsibility;
     }
 
     public String getInformation() {
@@ -93,11 +89,28 @@ public class Responsibility {
         this.petId = petId;
     }
 
-    public int getOwnerId() {
-        return ownerId;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getReadyDate() {
+        return readyDate;
+    }
+
+    public void setReadyDate(String readyDate) {
+        this.readyDate = readyDate;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
     }
 }
+

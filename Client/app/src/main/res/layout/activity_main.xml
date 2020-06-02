@@ -1,18 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_menu_layout"
+        android:layout_above="@+id/menu_btns_layout"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/menu_btns_layout"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="32dp"
+        android:layout_centerHorizontal="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/menu_pets_list_btn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_pets_black_36dp" />
+
+        <ImageView
+            android:id="@+id/menu_responsibility_list_btn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="16dp"
+            app:srcCompat="@drawable/baseline_calendar_today_black_36dp" />
+
+        <ImageView
+            android:id="@+id/menu_things_list_btn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="16dp"
+            app:srcCompat="@drawable/baseline_local_dining_black_36dp" />
+
+        <ImageView
+            android:id="@+id/menu_family_members_list_btn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="16dp"
+            app:srcCompat="@drawable/baseline_supervisor_account_black_36dp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

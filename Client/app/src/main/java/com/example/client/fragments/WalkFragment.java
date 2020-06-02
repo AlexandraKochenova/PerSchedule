@@ -17,11 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.client.R;
-import com.example.client.classes.Walk;
+import com.example.client.classes.responsibilitiesclasses.Walk;
 import com.example.client.helpers.Constants;
 import com.example.client.helpers.DatabaseHelper;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class WalkFragment extends Fragment {

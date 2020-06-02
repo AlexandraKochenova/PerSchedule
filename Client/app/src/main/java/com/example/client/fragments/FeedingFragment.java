@@ -20,15 +20,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.client.R;
 import com.example.client.activities.NewProductActivity;
-import com.example.client.classes.Feeding;
-import com.example.client.classes.Product;
+import com.example.client.classes.responsibilitiesclasses.Feeding;
+import com.example.client.classes.thingsclasses.Product;
 import com.example.client.helpers.Constants;
 import com.example.client.helpers.DatabaseHelper;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class FeedingFragment extends Fragment {

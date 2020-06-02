@@ -15,6 +15,9 @@ namespace FeedMeServer.Models
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
+        [DataMember(Name = "lastName")]
+        public string LastName { get; set; }
+
         [DataMember(Name = "login")]
         public string Login { get; set; }
 
@@ -24,10 +27,5 @@ namespace FeedMeServer.Models
         [DataMember(Name = "familyId")]
         public int FamilyId { get; set; }
 
-        [DataMember(Name = "familyName")]
-        public string FamilyName { get; set; }
-
-        [DataMember(Name = "isHeadOfFamily")]
-        public bool IsHeadOfFamily { get; set; }
     }
 }

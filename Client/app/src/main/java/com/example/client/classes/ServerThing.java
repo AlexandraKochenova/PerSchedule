@@ -1,24 +1,28 @@
-package com.example.client.server_models;
+package com.example.client.classes;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class Thing {
 
+public class ServerThing {
     @SerializedName("id")
     @Expose
-    public int id;
+    private int id;
 
     @SerializedName("name")
     @Expose
-    public String name;
+    private String name;
 
     @SerializedName("code")
     @Expose
-    public int code;
+    private int code;
 
     @SerializedName("information")
     @Expose
-    public String information;
+    private String information;
 
+    @SerializedName("familyID")
+    @Expose
+    private int familyID;
 
     public int getCode() {
         return code;
@@ -50,5 +54,13 @@ public class Thing {
 
     public void setInformation(String information) {
         this.information = information;
+    }
+
+    public int getFamilyID() {
+        return familyID;
+    }
+
+    public void setFamilyID(int familyID) {
+        this.familyID = familyID;
     }
 }

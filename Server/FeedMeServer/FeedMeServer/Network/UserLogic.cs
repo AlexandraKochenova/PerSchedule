@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Web;
 using FeedMeServer.Models;
@@ -67,8 +68,8 @@ namespace FeedMeServer.Network
                     currentUser.Login = user.Login;
                     currentUser.Password = user.Password;
                     currentUser.Name = user.Name;
+                    currentUser.LastName = user.LastName;
                     currentUser.FamilyId = user.FamilyId;
-                    currentUser.IsHeadOfFamily = user.IsHeadOfFamily;
                     context.SaveChanges();
                     return Constants.USER_UPDATED;
                 }

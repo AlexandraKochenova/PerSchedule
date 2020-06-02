@@ -1,6 +1,6 @@
 package com.example.client.responses;
 
-import com.example.client.server_models.ServerPet;
+import com.example.client.classes.Pet;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,13 +10,13 @@ public class AllPetsResponse extends BaseResponse {
 
     @SerializedName("petsList")
     @Expose
-    public List<ServerPet> petsList;
+    public List<Pet> petsList;
 
-    public List<ServerPet> getPetsList() {
+    public List<Pet> getPetsList() {
         return petsList;
     }
 
-    public void setPetsList(List<ServerPet> petsList) {
+    public void setPetsList(List<Pet> petsList) {
         this.petsList = petsList;
     }
 }

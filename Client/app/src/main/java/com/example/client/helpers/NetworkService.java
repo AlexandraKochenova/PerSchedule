@@ -35,4 +35,5 @@ public class NetworkService {
     public ServerApi getJSONApi() {
         return mRetrofit.create(ServerApi.class);
     }
+
 }

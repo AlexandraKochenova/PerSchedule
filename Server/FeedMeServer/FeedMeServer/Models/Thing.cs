@@ -21,5 +21,8 @@ namespace FeedMeServer.Models
 
         [DataMember(Name = "information")]
         public string Information { get; set; }
+
+        [DataMember(Name = "familyID")]
+        public int FamilyID { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-package com.example.client.classes;
+package com.example.client.classes.responsibilitiesclasses;
+
+import com.example.client.classes.Responsibility;
 
 import java.util.Date;
 

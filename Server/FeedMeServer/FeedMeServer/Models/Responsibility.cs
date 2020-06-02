@@ -18,6 +18,12 @@ namespace FeedMeServer.Models
         [DataMember(Name = "timeDoing")] 
         public long TimeDoing { get; set; }
 
+        [DataMember(Name = "readyDates")]
+        public string ReadyDate { get; set; }
+
+        [DataMember(Name = "period")]
+        public string Period { get; set; }
+
         [DataMember(Name = "information")]
         public string Information { get; set; }
 
@@ -27,7 +33,7 @@ namespace FeedMeServer.Models
         [DataMember(Name = "petId")]
         public int PetId { get; set; }
 
-        [DataMember(Name = "ownerId")]
-        public int OwnerId { get; set; }
+        [DataMember(Name = "userID")]
+        public int UserID { get; set; }
     }
 }

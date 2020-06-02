@@ -5,17 +5,20 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.provider.ContactsContract;
 
-import com.example.client.classes.Feeding;
-import com.example.client.classes.Medicine;
+import com.example.client.classes.FamilyUserRelation;
+import com.example.client.classes.Thing;
+import com.example.client.classes.responsibilitiesclasses.Feeding;
+import com.example.client.classes.responsibilitiesclasses.Medicine;
 import com.example.client.classes.Pet;
-import com.example.client.classes.Pill;
-import com.example.client.classes.Product;
+import com.example.client.classes.thingsclasses.Pill;
+import com.example.client.classes.thingsclasses.Product;
 import com.example.client.classes.Responsibility;
 import com.example.client.classes.User;
-import com.example.client.classes.Walk;
+import com.example.client.classes.responsibilitiesclasses.Walk;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String RESPONSIBILITY_TABLE = "responsibility_table";
     public static final String RESPONSIBILITY_READY_TABLE = "responsibility_ready_table";
     public static final String MEDICINE_TABLE = "medicine_table";
+    public static final String FRIENDSHIP_TABLE = "friendship_table";
 
     public static final String COLUMN_PETS_ID = "pets_id";
     public static final String COLUMN_PETS_ID_SERVER = "pets_id_server";
@@ -54,10 +58,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_USER_ID = "user_id";
     public static final String COLUMN_USER_SERVER_ID = "user_server_id";
     public static final String COLUMN_USER_NAME = "user_name";
+    public static final String COLUMN_USER_LAST_NAME = "user_last_name";
     public static final String COLUMN_USER_LOGIN = "login";
     public static final String COLUMN_USER_PASSWORD = "password";
     public static final String COLUMN_USER_FAMILY_ID = "family_id";
-    public static final String COLUMN_USER_IS_HEAD_OF_FAMILY = "is_head_of_family";
     public static final String COLUMN_USER_IS_CURRENT = "is_current_user";
 
     public static final String COLUMN_RESPONSIBILITY_ID = "responsibility_id";
@@ -71,6 +75,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String COLUMN_RESPONSIBILITY_READY_ID = "responsibility_ready_id";
     public static final String COLUMN_RESPONSIBILITY_READY_DATE = "responsibility_ready_date";
+
+    public static final String COLUMN_FRIENDSHIP_ID = "friendship_id";
+    public static final String COLUMN_FRIENDSHIP_SERVER_ID = "friendship_server_id";
+    public static final String COLUMN_FRIENDSHIP_USER_FIRST = "friendship_user_first";
+    public static final String COLUMN_FRIENDSHIP_USER_SECOND = "friendship_user_second";
+
+
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, SCHEMA);
@@ -100,7 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_USER_PASSWORD + " TEXT," +
                 COLUMN_USER_FAMILY_ID + " TEXT," +
                 COLUMN_USER_IS_CURRENT + " TEXT," +
-                COLUMN_USER_IS_HEAD_OF_FAMILY + " TEXT" + ");");
+                COLUMN_USER_LAST_NAME + " TEXT" + ");");
         sqLiteDatabase.execSQL("CREATE TABLE " + RESPONSIBILITY_TABLE + "(" +
                 COLUMN_RESPONSIBILITY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_RESPONSIBILITY_SERVER_ID + " INTEGER," +
@@ -119,11 +130,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_MEDICINE_SERVER_ID + " INTEGER,"+
                 COLUMN_MEDICINE_NAME + " TEXT," +
                 COLUMN_MEDICINE_STORE + " REAL" +")");
+        sqLiteDatabase.execSQL("CREATE TABLE " + FRIENDSHIP_TABLE + "(" +
+                COLUMN_FRIENDSHIP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_FRIENDSHIP_SERVER_ID + " INTEGER," +
+                COLUMN_FRIENDSHIP_USER_FIRST + " TEXT," +
+                COLUMN_FRIENDSHIP_USER_SECOND + " TEXT"+ ")");
+        sqLiteDatabase.execSQL("");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PETS_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MEDICINE_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PRODUCT_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + RESPONSIBILITY_READY_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + RESPONSIBILITY_TABLE);
+        onCreate(sqLiteDatabase);
     }
 
     /////PETS
@@ -143,7 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int id = query.getInt(indexId);
                 String name = query.getString(indexName);
                 Date birth = new Date(Long.valueOf(query.getString(indexDate)));
-                boolean sex = query.getInt(indexSex) == 0 ? false : true;
+                boolean sex = query.getInt(indexSex) == 1;
                 String type = query.getString(indexType);
                 Pet pet = new Pet(id, name, birth, sex, type);
                 list.add(pet);
@@ -188,9 +211,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             int indexInformation = query.getColumnIndex(DatabaseHelper.COLUMN_RESPONSIBILITY_INFORMATION);
             do {
                 int petID = query.getInt(indexPetId);
-                if (petID != petId) {
-                    continue;
+                if (petId == -1 ){
+
                 }
+                else{
+                    if (petID != petId) {
+                        continue;
+                    }
+                }
+
+
                 int id = query.getInt(indexId);
                 String name = query.getString(indexName);
 
@@ -199,7 +229,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     time = new Date(doneResponsibilityForTime(id, time));
                 }
                 int period = query.getInt(indexPeriod);
-                String[] information = query.getString(indexInformation).split(":");
+                String[] information = query.getString(indexInformation).split("@");
                 switch (name) {
                     case Constants.RESPONSIBILITY_CODE_FEDDING : {
                         List<Product> listProducts = selectProducts();
@@ -304,6 +334,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseHelper.COLUMN_RESPONSIBILITY_ID + " = ?", new String[] { String.valueOf(id) });
     }
 
+    //THING
+    public long saveNewThing(Thing thing) {
+        if (thing.getInformation().split("@")[1].equals("-")) {
+            return addNewPill((Pill)thing);
+        }
+        else{
+            return saveNewProduct((Product) thing);
+        }
+    }
+
+
     /////PRODUCTS
 
     public long saveNewProduct(Product product) {
@@ -393,7 +434,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(DatabaseHelper.COLUMN_USER_NAME, user.getName());
         cv.put(DatabaseHelper.COLUMN_USER_FAMILY_ID, user.getFamilyId());
         cv.put(DatabaseHelper.COLUMN_USER_IS_CURRENT, "true");
-        cv.put(DatabaseHelper.COLUMN_USER_IS_HEAD_OF_FAMILY, user.isHeadOfFamily());
+        return sqLiteDatabase.insert(DatabaseHelper.USER_TABLE, null, cv);
+    }
+
+    public long saveNewUser(User user) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        ContentValues cv = getCVFromUser(user);
         return sqLiteDatabase.insert(DatabaseHelper.USER_TABLE, null, cv);
     }
 
@@ -425,8 +471,103 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return 0;
     }
 
+    public List<User> selectFamily(){
+        List<User> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor query = sqLiteDatabase.rawQuery("SELECT * FROM " + DatabaseHelper.USER_TABLE, null);
+        if (query.moveToFirst()){
+            int indexId = query.getColumnIndex(DatabaseHelper.COLUMN_USER_SERVER_ID);
+            int indexName = query.getColumnIndex(DatabaseHelper.COLUMN_USER_NAME);
+            int indexLastName = query.getColumnIndex(DatabaseHelper.COLUMN_USER_LAST_NAME);
+            do {
+                int id = query.getInt(indexId);
+                String name = query.getString(indexName);
+                String lastName = query.getString(indexLastName);
+                User user = new User();
+                user.setId(id);
+                user.setName(name);
+                user.setLastName(lastName);
+                list.add(user);
+            }while(query.moveToNext());
+        }
+        return list;
+    }
+
+    public long updateFam(User user){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        ContentValues cv = getCVFromUser(user);
+        int x = sqLiteDatabase.update(DatabaseHelper.USER_TABLE, cv, DatabaseHelper.COLUMN_USER_SERVER_ID + " = ?", new String[] { String.valueOf(user.getId())});
+        if (x > 0){
+            return x;
+        }
+        else {
+            return saveNewUser(user);
+        }
+    }
 
 
+    //FRIENDSHIP
+
+    public long addNewFriendship(FamilyUserRelation friendship) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseHelper.COLUMN_FRIENDSHIP_SERVER_ID, friendship.getID());
+        try{
+            JSONObject user1 = new JSONObject();
+            user1.put(DatabaseHelper.COLUMN_USER_SERVER_ID, friendship.getUserFirst().getId());
+            user1.put(DatabaseHelper.COLUMN_USER_NAME, friendship.getUserFirst().getName());
+            user1.put(DatabaseHelper.COLUMN_USER_LAST_NAME, friendship.getUserFirst().getName());
+            JSONObject user2 = new JSONObject();
+            user2.put(DatabaseHelper.COLUMN_USER_SERVER_ID, friendship.getUserSecond().getId());
+            user2.put(DatabaseHelper.COLUMN_USER_NAME, friendship.getUserSecond().getName());
+            user2.put(DatabaseHelper.COLUMN_USER_LAST_NAME, friendship.getUserSecond().getName());
+            cv.put(DatabaseHelper.COLUMN_FRIENDSHIP_USER_FIRST, user1.toString());
+            cv.put(DatabaseHelper.COLUMN_FRIENDSHIP_USER_SECOND, user2.toString());
+        }
+        catch (Exception e) {
+
+        }
+        return sqLiteDatabase.insert(FRIENDSHIP_TABLE, null, cv);
+    }
+
+    public List<FamilyUserRelation> selectFriendships() {
+        List<FamilyUserRelation> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor query = sqLiteDatabase.rawQuery("SELECT * FROM " + DatabaseHelper.FRIENDSHIP_TABLE, null);
+        if (query.moveToFirst()) {
+            int indexID = query.getColumnIndex(DatabaseHelper.COLUMN_FRIENDSHIP_SERVER_ID);
+            int indexUserFirst = query.getColumnIndex(DatabaseHelper.COLUMN_FRIENDSHIP_USER_FIRST);
+            int indexUserSecond = query.getColumnIndex(DatabaseHelper.COLUMN_FRIENDSHIP_USER_SECOND);
+            do {
+                String userFirstJSON = query.getString(indexUserFirst);
+                String userSecondJSON = query.getString(indexUserSecond);
+                FamilyUserRelation familyUserRelation = new FamilyUserRelation();
+                familyUserRelation.setID(query.getInt(indexID));
+                try {
+                    JSONObject object1 = new JSONObject(userFirstJSON);
+                    User user1 = new User();
+                    user1.setId(object1.getInt(DatabaseHelper.COLUMN_USER_SERVER_ID));
+                    user1.setName(object1.getString(DatabaseHelper.COLUMN_USER_NAME));
+                    user1.setLastName(object1.getString(DatabaseHelper.COLUMN_USER_LAST_NAME));
+                    familyUserRelation.setUserFirst(user1);
+
+                    JSONObject object2 = new JSONObject(userSecondJSON);
+                    User user2 = new User();
+                    user2.setId(object2.getInt(DatabaseHelper.COLUMN_USER_SERVER_ID));
+                    user2.setName(object2.getString(DatabaseHelper.COLUMN_USER_NAME));
+                    user2.setLastName(object2.getString(DatabaseHelper.COLUMN_USER_LAST_NAME));
+                    familyUserRelation.setUserSecond(user2);
+
+                }
+                catch (Exception e) {
+
+                }
+                list.add(familyUserRelation);
+
+            } while(query.moveToNext());
+        }
+        return list;
+    }
 
     // GET CV
 
@@ -440,5 +581,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cv;
     }
 
+    private ContentValues getCVFromUser(User user) {
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseHelper.COLUMN_USER_SERVER_ID, user.getId());
+        cv.put(DatabaseHelper.COLUMN_USER_LOGIN, user.getLogin());
+        cv.put(DatabaseHelper.COLUMN_USER_PASSWORD, user.getPassword());
+        cv.put(DatabaseHelper.COLUMN_USER_NAME, user.getName());
+        cv.put(DatabaseHelper.COLUMN_USER_LAST_NAME, user.getLastName());
+        cv.put(DatabaseHelper.COLUMN_USER_FAMILY_ID, user.getFamilyId());
+        cv.put(DatabaseHelper.COLUMN_USER_IS_CURRENT, "false");
+        return cv;
+    }
 
 }

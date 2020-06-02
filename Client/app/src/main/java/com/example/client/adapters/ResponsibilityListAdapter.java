@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.client.R;
-import com.example.client.classes.Product;
+import com.example.client.classes.thingsclasses.Product;
 import com.example.client.classes.Responsibility;
 import com.example.client.helpers.Constants;
 import com.example.client.helpers.DatabaseHelper;
@@ -76,13 +76,13 @@ public class ResponsibilityListAdapter extends RecyclerView.Adapter<Responsibili
                     List<Product> list = dbHelper.selectProducts();
                     Product product = null;
                     for (Product pro : list) {
-                        if (Integer.valueOf(item.getInformation().split(":")[0]) == pro.getId()){
+                        if (Integer.valueOf(item.getInformation().split("@")[0]) == pro.getId()){
                             product = pro;
                             break;
                         }
                     }
                     if (product != null) {
-                        double pick = (double)Integer.valueOf(item.getInformation().split(":")[1])/1000;
+                        double pick = (double)Integer.valueOf(item.getInformation().split("@")[1])/1000;
 
                         product.setStore(pick);
                         int x = dbHelper.pickStore(product);
@@ -90,7 +90,7 @@ public class ResponsibilityListAdapter extends RecyclerView.Adapter<Responsibili
                             Toast.makeText(context, "Failed, try again", Toast.LENGTH_LONG).show();
                         }
                         if (product.getStore() < 0.2) {
-                            Toast.makeText(context, "Заканчиваются запасы: " + product.getName(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Заканчиваются запасы: " + product.getName() + ", осталось " + product.getStore(), Toast.LENGTH_LONG).show();
                         }
                     }
                 }

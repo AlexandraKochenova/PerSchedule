@@ -1,4 +1,7 @@
-package com.example.client.classes;
+package com.example.client.classes.responsibilitiesclasses;
+
+import com.example.client.classes.Responsibility;
+import com.example.client.helpers.Constants;
 
 import java.util.Date;
 
@@ -7,6 +10,18 @@ public class Medicine extends Responsibility {
     //private Pill pill;
     private String pill;
     private int value;
+
+    public Medicine(int petId,
+                    int userId,
+                    long dateCreating,
+                    long timeDoing,
+                    int period,
+                    String pill,
+                    int value){
+        super(petId, Constants.RESPONSIBILITY_CODE_WALK, dateCreating, timeDoing, period, userId);
+        this.pill = pill;
+        this.value = value;
+    }
 
     public Medicine(int petId, int id, String name, Date responsibilityDate, int period, String pill, int value) {
         super(petId, id, name, responsibilityDate, period);
@@ -44,12 +59,12 @@ public class Medicine extends Responsibility {
     @Override
     public String getInformation() {
 //        return String.valueOf(pill.getId()) + ":" + String.valueOf(this.value);
-        return pill + ":" + String.valueOf(this.value);
+        return pill + "@" + String.valueOf(this.value);
     }
 
     @Override
     public String getInformationForActivity() {
 //        return String.valueOf(pill.getId()) + ": " + String.valueOf(this.value);
-        return pill + ": " + String.valueOf(this.value);
+        return pill + "@ " + String.valueOf(this.value);
     }
 }

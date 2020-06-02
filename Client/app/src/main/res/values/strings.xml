@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Питомцы</string>
 
+    <string name="ok">OK</string>
+
+
     <string name="add_new_pet_txt">Добавить питомца</string>
     <string name="schedule_btn_txt">Расписание кормления</string>
 
@@ -52,5 +55,9 @@
     <string name="medicine_input">Введите название лекарства</string>
     <string name="value_in_things">шт.</string>
 
+    <string name="friendships_input_txt">Входящие</string>
+    <string name="friendships_output_txt">Исходящие</string>
+
+    <string name="friendship_input_id_txt">Введите id пользователя</string>
 
 </resources>

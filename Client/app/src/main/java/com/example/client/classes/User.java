@@ -1,13 +1,50 @@
 package com.example.client.classes;
 
+import android.widget.ScrollView;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class User {
 
+    @SerializedName("id")
+    @Expose
     private int id;
+
+    @SerializedName("name")
+    @Expose
     private String name;
+
+    @SerializedName("lastName")
+    @Expose
+    private String lastName;
+
+    @SerializedName("login")
+    @Expose
     private String login;
+
+    @SerializedName("password")
+    @Expose
     private String password;
+
+    @SerializedName("familyId")
+    @Expose
     private int familyId;
-    private boolean isHeadOfFamily;
+
+    public User(){
+
+    }
+
+    public User(int id) {
+        this.id = id;
+    }
+
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
 
     public int getId() {
         return id;
@@ -33,14 +70,6 @@ public class User {
         this.familyId = familyId;
     }
 
-    public boolean isHeadOfFamily() {
-        return isHeadOfFamily;
-    }
-
-    public void setHeadOfFamily(boolean headOfFamily) {
-        isHeadOfFamily = headOfFamily;
-    }
-
     public String getLogin() {
         return login;
     }
@@ -55,5 +84,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

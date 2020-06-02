@@ -7,15 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.client.R;
 import com.example.client.activities.ScheduleActivity;
 import com.example.client.classes.Pet;
-import com.example.client.classes.Schedule;
-
 import java.util.List;
 
 public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
@@ -30,7 +26,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
         public ViewHolder(View view) {
             super(view);
             petName = (TextView) view.findViewById(R.id.pet_item_name_text);
-            //petBtn = (ImageView) view.findViewById(R.id.pet_item_image_edit_view);
+            petBtn = (ImageView) view.findViewById(R.id.pet_item_image_edit_view);
         }
     }
 

@@ -27,10 +27,12 @@ namespace FeedMeServer.Network
                 {
                     currentResponsibility.DateCreating = responsibility.DateCreating;
                     currentResponsibility.TimeDoing = responsibility.TimeDoing;
+                    currentResponsibility.ReadyDate = responsibility.ReadyDate;
+                    currentResponsibility.Period = currentResponsibility.Period;
                     currentResponsibility.Information = responsibility.Information;
                     currentResponsibility.ResponsibilityCode = responsibility.ResponsibilityCode;
                     currentResponsibility.PetId = responsibility.PetId;
-                    currentResponsibility.OwnerId = responsibility.OwnerId;
+                    currentResponsibility.UserID = responsibility.UserID;
                     context.SaveChanges();
                     return Constants.RESPONSIBILITY_UPDATED;
                 }
@@ -73,7 +75,7 @@ namespace FeedMeServer.Network
                     User user = users.First();
                     int familyId = user.FamilyId;
                     response.ResponsibilitiesList = new List<Responsibility>();
-                    var pets = from p in context.Pets where p.OwnerFamilyId.Equals(familyId) select p;
+                    var pets = from p in context.Pets where p.FamilyID.Equals(familyId) select p;
                     if (pets != null && pets.Count() > 0)
                     {
                         pets.ToList<Pet>().ForEach(delegate (Pet pet)
@@ -88,10 +90,12 @@ namespace FeedMeServer.Network
                                         Id = responsibility.Id,
                                         DateCreating = responsibility.DateCreating,
                                         TimeDoing = responsibility.TimeDoing,
+                                        ReadyDate = responsibility.ReadyDate,
+                                        Period = responsibility.Period,
                                         Information = responsibility.Information,
                                         ResponsibilityCode = responsibility.ResponsibilityCode,
                                         PetId = responsibility.PetId,
-                                        OwnerId = responsibility.OwnerId
+                                        UserID = responsibility.UserID
                                     };
                                     response.ResponsibilitiesList.Add(currentResponsibility);
                                     response.Status = (int)Constants.STATUSES.OK;

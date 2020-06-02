@@ -85,20 +85,33 @@
     <Compile Include="Migrations\202005210554533_AddCorrectionsMigration.designer.cs">
       <DependentUpon>202005210554533_AddCorrectionsMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005290946544_AddThingsAndFamilyMigrations.cs" />
+    <Compile Include="Migrations\202005290946544_AddThingsAndFamilyMigrations.designer.cs">
+      <DependentUpon>202005290946544_AddThingsAndFamilyMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006021119140_AddCorrectionsFriendshipMigration.cs" />
+    <Compile Include="Migrations\202006021119140_AddCorrectionsFriendshipMigration.designer.cs">
+      <DependentUpon>202006021119140_AddCorrectionsFriendshipMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AllFriendshipResponse.cs" />
     <Compile Include="Models\AllPetsResponse.cs" />
     <Compile Include="Models\AllResponsibilityResponse.cs" />
+    <Compile Include="Models\AllThingsResponse.cs" />
     <Compile Include="Models\Auth.cs" />
     <Compile Include="Models\BaseResponse.cs" />
     <Compile Include="Models\Family.cs" />
-    <Compile Include="Models\Food.cs" />
+    <Compile Include="Models\FamilyResponse.cs" />
+    <Compile Include="Models\FamilyUserRelations.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\Responsibility.cs" />
     <Compile Include="Models\Thing.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserResponse.cs" />
+    <Compile Include="Network\FamilyLogic.cs" />
     <Compile Include="Network\PetLogic.cs" />
     <Compile Include="Network\ResponsibilityLogic.cs" />
+    <Compile Include="Network\ThingLogic.cs" />
     <Compile Include="Network\UserLogic.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
@@ -124,6 +137,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005210554533_AddCorrectionsMigration.resx">
       <DependentUpon>202005210554533_AddCorrectionsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005290946544_AddThingsAndFamilyMigrations.resx">
+      <DependentUpon>202005290946544_AddThingsAndFamilyMigrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006021119140_AddCorrectionsFriendshipMigration.resx">
+      <DependentUpon>202006021119140_AddCorrectionsFriendshipMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

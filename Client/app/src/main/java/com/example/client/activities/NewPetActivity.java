@@ -86,15 +86,16 @@ public class NewPetActivity extends AppCompatActivity {
     }
 
     public void petListOpen(){
-        Intent intent = new Intent(getApplicationContext(), PetListActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
 
     public void savePetToServer() {
         int ownerFamId = dbHelper.getFamId();
+        newPet.setFamilyId(ownerFamId);
         NetworkService.getInstance()
                 .getJSONApi()
-                .newPet(ServerToClientHelper.toServerPet(newPet,ownerFamId))
+                .newPet(newPet)
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {

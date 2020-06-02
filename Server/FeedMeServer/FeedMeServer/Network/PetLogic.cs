@@ -15,7 +15,7 @@ namespace FeedMeServer.Network
                 context.Pets.Add(pet);
                 context.SaveChanges();
                 string response = Constants.PET_CREATED;
-                var pets = from p in context.Pets where p.OwnerFamilyId.Equals(pet.OwnerFamilyId) select p;
+                var pets = from p in context.Pets where p.FamilyID.Equals(pet.FamilyID) select p;
                 if (pets != null && pets.Count() >0)
                 {
                     pets.ToList<Pet>().ForEach(delegate (Pet tempPet)
@@ -39,9 +39,10 @@ namespace FeedMeServer.Network
                 {
                     currentPet.Name = pet.Name;
                     currentPet.Age = pet.Age;
+                    currentPet.Sex = pet.Sex;
+                    currentPet.Type = pet.Type;
                     currentPet.Weight = pet.Weight;
-                    currentPet.ResponsibilityList = pet.ResponsibilityList;
-                    currentPet.OwnerFamilyId = pet.OwnerFamilyId;
+                    currentPet.FamilyID = pet.FamilyID;
                     context.SaveChanges();
                     return Constants.PET_UPDATED;
                 }
@@ -88,7 +89,7 @@ namespace FeedMeServer.Network
                 if (int.TryParse(id, out userId)){
                     var users = from u in context.Users where u.Id.Equals(userId) select u;
                     User user = users.First();
-                    var pets = from p in context.Pets where p.OwnerFamilyId.Equals(user.FamilyId) select p;
+                    var pets = from p in context.Pets where p.FamilyID.Equals(user.FamilyId) select p;
                     if (pets != null && pets.Count() > 0)
                     {
                         pets.ToList<Pet>().ForEach(delegate (Pet pet)
@@ -98,9 +99,10 @@ namespace FeedMeServer.Network
                                 Id = pet.Id,
                                 Name = pet.Name,
                                 Age = pet.Age,
+                                Sex = pet.Sex,
+                                Type = pet.Type,
                                 Weight = pet.Weight,
-                                ResponsibilityList = pet.ResponsibilityList,
-                                OwnerFamilyId = pet.OwnerFamilyId
+                                FamilyID = pet.FamilyID
                             };
                             response.PetsList.Add(currentPet);
                         });

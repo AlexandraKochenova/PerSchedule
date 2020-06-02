@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -18,8 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.client.R;
-import com.example.client.classes.Medicine;
-import com.example.client.classes.Pill;
+import com.example.client.classes.responsibilitiesclasses.Medicine;
 import com.example.client.helpers.Constants;
 import com.example.client.helpers.DatabaseHelper;
 

@@ -27,10 +27,7 @@ namespace FeedMeServer.Models
         [DataMember(Name = "weight")]
         public double Weight { get; set; }
 
-        [DataMember(Name = "responsibilityList")]
-        public string ResponsibilityList { get; set; }
-
-        [DataMember(Name = "ownerFamilyId")]
-        public int OwnerFamilyId { get; set; }
+        [DataMember(Name = "familyID")]
+        public int FamilyID { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace FeedMeServer
         public DbSet<User> Users { get; set; }
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Responsibility> Responsibilities { get; set; }
-        public DbSet<Food> Foods { get; set; }
         public DbSet<Thing> Things { get; set; }
+        public DbSet<FamilyUserRelations> FamilyUserRelations { get; set; }
     }
 }

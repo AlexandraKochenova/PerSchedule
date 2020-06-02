@@ -1,4 +1,4 @@
-package com.example.client.server_models;
+package com.example.client.classes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,11 +7,11 @@ public class Family {
 
     @SerializedName("id")
     @Expose
-    public int id;
+    private int id;
 
-    @SerializedName("name")
+    @SerializedName("headID")
     @Expose
-    public String name;
+    private int headID;
 
     public int getId() {
         return id;
@@ -21,11 +21,11 @@ public class Family {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getHeadID() {
+        return headID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHeadID(int headID) {
+        this.headID = headID;
     }
 }

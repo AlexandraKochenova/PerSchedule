@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.client.R;
-import com.example.client.classes.Product;
+import com.example.client.classes.thingsclasses.Product;
 import com.example.client.helpers.DatabaseHelper;
 
 public class NewProductActivity extends AppCompatActivity {

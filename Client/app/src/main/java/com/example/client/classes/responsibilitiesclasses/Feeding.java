@@ -1,11 +1,27 @@
-package com.example.client.classes;
+package com.example.client.classes.responsibilitiesclasses;
+
+import com.example.client.classes.Responsibility;
+import com.example.client.classes.thingsclasses.Product;
+import com.example.client.helpers.Constants;
+
+import org.json.JSONObject;
 
 import java.util.Date;
 
-public class Feeding extends Responsibility{
+public class Feeding extends Responsibility {
 
     private Product product;
     private int weightProduct;
+
+
+    public Feeding(int petId,
+                   int userId,
+                   long dateCreating,
+                   long timeDoing,
+                   int period){
+        super(petId, Constants.RESPONSIBILITY_CODE_FEDDING, dateCreating, timeDoing, period, userId);
+    }
+
 
     public Feeding(int petId, int id, String name, Date responsibilityDate, int period, Product product, int weightProduct){
         super(petId, id,name,responsibilityDate, period);
@@ -43,11 +59,21 @@ public class Feeding extends Responsibility{
 
     @Override
     public String getInformationForActivity() {
-        return this.product.getName() + ": " + this.weightProduct + " гр.";
+        return this.product.getName() + "@ " + this.weightProduct + " гр.";
     }
 
     @Override
     public String getInformation() {
-        return String.valueOf(product.getId()) + ":" + String.valueOf(weightProduct);
+        try {
+            JSONObject object = new JSONObject();
+            object.put("idProduct", product.getId());
+            object.put("nameProduct", product.getName());
+            object.put("informationProduct", product.getInformation());
+            return object.toString() + "@" + String.valueOf(weightProduct);
+        }
+        catch (Exception e) {
+
+        }
+        return "";
     }
 }

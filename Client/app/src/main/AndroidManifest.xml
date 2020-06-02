@@ -14,22 +14,17 @@
         </activity>
         <activity android:name=".activities.NewPetActivity"></activity>
         <activity android:name=".activities.NewProductActivity"></activity>
-        <activity android:name=".activities.PetListActivity">
-
-        </activity>
         <activity android:name=".activities.PetProfileActivity"></activity>
         <activity android:name=".activities.ScheduleActivity"></activity>
         <activity android:name=".activities.AuthorizationActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity android:name=".activities.NewResponsibilityActivity"/>
+        <activity android:name=".activities.FriendshipListActivity"/>
 
     </application>
 
